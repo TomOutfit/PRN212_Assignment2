@@ -1,0 +1,75 @@
+﻿<Window x:Class="WPFApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Product Management" Height="700" Width="900"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded"
+        Background="#F4F6FB">
+    <Grid Margin="0">
+                                <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="320"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+        <!-- Sidebar Form -->
+        <Border Grid.Column="0" Background="#FFFFFF" CornerRadius="10" Margin="20">
+            <StackPanel Margin="24">
+                <TextBlock Text="Product Information" FontWeight="Bold" FontSize="20" Foreground="#111" Margin="0,0,0,24"/>
+                <TextBlock Text="Product ID" Foreground="#222" Margin="0,0,0,4"/>
+                <TextBox x:Name="txtProductID" IsEnabled="False" Background="#F9F9F9" Foreground="#111" BorderBrush="#B0B0B0" BorderThickness="1" Margin="0,0,0,16" Height="32"/>
+
+                <TextBlock Text="Product Name" Foreground="#222" Margin="0,0,0,4"/>
+                <TextBox x:Name="txtProductName" Background="#F9F9F9" Foreground="#111" BorderBrush="#B0B0B0" BorderThickness="1" Margin="0,0,0,16" Height="32"/>
+
+                <TextBlock Text="Price" Foreground="#222" Margin="0,0,0,4"/>
+                <TextBox x:Name="txtPrice" Background="#F9F9F9" Foreground="#111" BorderBrush="#B0B0B0" BorderThickness="1" Margin="0,0,0,16" Height="32"/>
+
+                <TextBlock Text="Units In Stock" Foreground="#222" Margin="0,0,0,4"/>
+                <TextBox x:Name="txtUnitsInStock" Background="#F9F9F9" Foreground="#111" BorderBrush="#B0B0B0" BorderThickness="1" Margin="0,0,0,16" Height="32"/>
+
+                <TextBlock Text="Category" Foreground="#222" Margin="0,0,0,4"/>
+                <ComboBox x:Name="cboCategory"
+                          Background="#F9F9F9" Foreground="#111"
+                          BorderBrush="#B0B0B0" BorderThickness="1"
+                          Margin="0,0,0,32" Height="32"
+                          DisplayMemberPath="CategoryName"
+                          SelectedValuePath="CategoryId"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,8">
+                    <Button x:Name="btnCreate" Content="Create" Width="110" Height="36" Margin="4" Click="btnCreate_Click"
+                            Background="#43B581" Foreground="White" FontWeight="Bold" BorderThickness="0" />
+                    <Button x:Name="btnUpdate" Content="Update" Width="110" Height="36" Margin="4" Click="btnUpdate_Click"
+                            Background="#3498DB" Foreground="White" FontWeight="Bold" BorderThickness="0" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="btnDelete" Content="Delete" Width="110" Height="36" Margin="4" Click="btnDelete_Click"
+                            Background="#E74C3C" Foreground="White" FontWeight="Bold" BorderThickness="0" />
+                    <Button x:Name="btnClose" Content="Close" Width="110" Height="36" Margin="4" Click="btnClose_Click"
+                            Background="#F39C12" Foreground="White" FontWeight="Bold" BorderThickness="0" />
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <!-- DataGrid -->
+        <Border Grid.Column="1" Margin="0,20,20,20" Background="#FFFFFF" CornerRadius="10" VerticalAlignment="Bottom">
+                    <DataGrid x:Name="dgData" 
+                              SelectionChanged="dgData_SelectionChanged"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      IsReadOnly="True"
+                      SelectionMode="Single"
+                      VerticalAlignment="Bottom"
+                      HorizontalScrollBarVisibility="Disabled"
+                      HeadersVisibility="Column"
+                      ColumnWidth="*">
+                        <DataGrid.Columns>
+                    <DataGridTextColumn Header="Product ID" Binding="{Binding ProductID}" FontWeight="SemiBold"/>
+                    <DataGridTextColumn Header="Product Name" Binding="{Binding ProductName}" FontWeight="SemiBold"/>
+                    <DataGridTextColumn Header="Units In Stock" Binding="{Binding UnitsInStock}"/>
+                    <DataGridTextColumn Header="Price" Binding="{Binding UnitPrice, StringFormat=C}"/>
+                    <DataGridTextColumn Header="Category" Binding="{Binding Category.CategoryName}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+        </Border>
+    </Grid>
+</Window>
